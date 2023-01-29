@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>verwijderen records</title>
+</head>
+<body>
+	{% extends 'base_be.html' %}
+	{% block content %}
+		<h1>Verwijderen records</h1>
+		<p>Let op! Veel data is gekoppeld aan andere types data. Het onoordeelkundig verwijderen van de verkeerde
+			data kan leiden tot een crash van de app.</p>
+		<p>dus:
+		<ul>
+			<li>Gast kan niet verwijderd als er nog boekingen van die gast zijn</li>
+			<li>Huis kan niet verwijderd worden als er nog boekingen zijn</li>
+			<li>Huis type kan niet verwijderd worden als er nog huizen van dat type zijn!</li>
+		</ul>
+		</p>
+		<table class="table table-striped">
+			<tr>
+				{% for item in data.keys() %}
+					<th scope="col">{{ item }}</th>
+				{% endfor %}
+			</tr>
+			{% for item in data %}
+				<tr>
+					{% for i in range(item|length) %}
+						<td>{{ item[i] }}</td>
+					{% endfor %}
+				</tr>
+			{% endfor %}
+		</table>
+	{% endblock %}
+</body>
+</html>

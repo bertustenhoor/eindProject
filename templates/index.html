@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% extends 'base.html' %}
+	<meta charset="UTF-8">
+	<title>Zee & Duin</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+
+	{% block content %}
+		<div class="card border-0">
+			<video src="/static/beach1920750.mp4" autoplay muted loop class="w-100"></video>
+{#			<img src="../static/zeeenduin.jpg" class="card-img w-100" alt="Sea and dunes">#}
+			<div class="card-img-overlay w-75 mx-auto flex-column justify-content-center">
+				<h1 class="card-title text-center text-success">Welkom bij "Zee & Duin"!</h1>
+				<p class="card-title display-6 text-center">Waar ontspanning, natuur en rust samenkomen..</p>
+				<div class="p-5 mt-5">
+					<p class="card-text text-center fs-5 text-dark">Wil je je ultieme vakantie vieren? Kom dan naar het
+						prachtige
+						"Zee & Duin" aan de kust en geniet van het heerlijke strand, de rustgevende duinen en de
+						adembenemende natuur. "Zee & Duin" vakantiepark biedt alles wat je nodig hebt voor een
+						ontspannen en onvergetelijke vakantie.Probeer de lokale specialiteiten en geniet van de
+						heerlijke restaurants met heerlijke gerechten.</p>
+
+					<p class="card-text text-center fs-5 text-dark">Vakantiepark "Zee & Duin" ligt aan de rand van een
+						rustig dorp.
+						Geniet van het rustige landschap, omringd door de schoonheid van de rustgevende duinen. Klim
+						op de duinen en geniet van het adembenemende uitzicht over het zee. De lucht is er vol met de
+						frisse geur van de zee.</p>
+
+					<p class="card-text text-center fs-5 text-dark">Wanneer je naar het strand gaat, vind je een prachtig
+						gebied met
+						glinsterend witte zandstranden. Geniet van de zon en het uitzicht over de zee. Laat je
+						meevoeren in de golven en luister naar het kalmerende, rustgevende geluid van de branding.</p>
+
+					<p class="card-text text-center fs-5 text-dark"><strong>Kom naar "Zee & Duin" aan de kust en geniet
+						van een onvergetelijke ervaring. Ontdek de schoonheid van de natuur, het rustgevende
+						landschap, het heerlijke strand en het glinsterende meer. Beleef ultieme ontspanning, rust en
+						plezier in ons prachtige vakantiepark "Zee & Duin".</strong></p>
+
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+</body>
+</html>

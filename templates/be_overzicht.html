@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Overzicht</title>
+</head>
+<body>
+	{% extends 'base_be.html' %}
+	<div class="container">
+		{% block content %}
+			<table class="table table-striped">
+				<tr>
+					{% for item in data.keys() %}
+						<th scope="col">{{ item }}</th>
+					{% endfor %}
+				</tr>
+				{% for item in data %}
+					<tr>
+						{% for i in range(item|length) %}
+							<td>{{ item[i] }}</td>
+						{% endfor %}
+					</tr>
+				{% endfor %}
+			</table>
+			</div>
+		{% endblock %}
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Onze villa's</title>
+</head>
+<body>
+	{% extends 'base.html' %}
+	{% block content %}
+		<div class="container">
+		<h1>Overzicht woningen</h1>
+			<ul>
+				{% for huis in huisjes %}
+					<li class="list-unstyled">{{ huis.naam }} type: {{ huis.type }}</li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endblock %}
+</body>
+</html>

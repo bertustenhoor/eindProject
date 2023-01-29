@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% extends 'base_be.html' %}
+	<meta charset="UTF-8">
+	<title>Toevoegen {{ table }}</title>
+</head>
+<body>
+	{% block content %}
+		<div class="container">
+			<form method="POST">
+				{{ form.hidden_tag() }}
+				{% if table == 'boeking' %}
+					{{ form.gast.label }} {{ form.gast() }}
+					{{ form.huis.label }} {{ form.huis() }}
+					{{ form.week.label }} {{ form.week() }}
+					{{ form.submit() }}
+				{% elif table == 'huis' %}
+					{{ form.naam.label }} {{ form.naam() }}
+					{{ form.huisType.label }} {{ form.huisType() }}
+					{{ form.submit() }}
+				{% elif table == 'types' %}
+					{{ form.idType.label }} {{ form.idType() }}
+					{{ form.capaciteit.label }} {{ form.capaciteit() }}
+					{{ form.weekprijs.label }} {{ form.weekprijs() }}
+					{{ form.submit() }}
+				{% elif table == 'gast' %}
+					{{ form.email.label }} {{ form.email() }}
+					{{ form.wachtwoord.label }} {{ form.wachtwoord() }}
+					{{ form.submit() }}
+				{% endif %}
+			</form>
+		</div>
+	{% endblock %}
+</body>
+</html>

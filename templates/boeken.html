@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<div class="container">
+		<div class="card mx-auto mt-4 mb-5 shadow-lg" style="width: 50%;">
+			<div class="card-header">
+				<h3 class="text-success text-center">Onze villa's van type {{ type }}</h3>
+			</div>
+			<img src="{{ imgsrc }}" class="card-img-top" alt="Villa">
+			<div class="card-body">
+				<h5 class="card-title text-success text-center">{{ type }}</h5>
+				<p class="card-text">
+					{{ omschrijving }}
+				</p>
+				<form method="POST">
+					{{ form.hidden_tag() }}
+					<table class="mx-auto text-center">
+						<tr class="p-2">
+							<td class="p-2">
+								Weeknummer
+							</td>
+							<td class="p-2">
+								{{ form.week() }}
+							</td>
+						</tr>
+						<tr class="p-2">
+							<td colspan="2" class="text-center p-2">
+								{{ form.submit() }}
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
