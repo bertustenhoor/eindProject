@@ -1,13 +1,7 @@
-import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-
 app = Flask(__name__)
-
-
-
-# basedir = os.path.abspath(os.path.dirname(__file__))
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:Hanze12345@localhost/zeeenduin'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -47,6 +41,16 @@ class Gast(db.Model):
     wachtwoord = db.Column(db.Text)
     
     gboekingen = db.relationship('Boeking', backref='b_gast', lazy=True)
+    
+
+class Types(db.Model):
+    __tablename__ = 'types'
+    idType = db.Column(db.Text, primary_key=True)
+    capaciteit = db.Column(db.Integer)
+    weekprijs = db.Column(db.Float)
+    
+    thuizen = db.relationship('Huis', backref='h_types', lazy=True)
+    
     
 with app.app_context():
     db.create_all()

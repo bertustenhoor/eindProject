@@ -1,5 +1,5 @@
 from flask import render_template, redirect, url_for
-from model import db, app, Huis, Boeking, Gast
+from model import db, app, Huis, Boeking, Gast, Types
 from forms import reserverenWeek, BoekenForm, BeToevoegenBoeking, BeToevoegenHuis, BeToevoegenTypes, BeToevoegenGast, BeVerwijderenBoeking, \
     BeVerwijderenGast, BeVerwijderenHuis, BeVerwijderenTypes
 from sqlalchemy import text
@@ -142,7 +142,9 @@ def be_toevoegen(table):                    # TODO: add to database, check for d
     
 @app.route('/be_verwijderen/<table>', methods=['GET', 'POST'])
 def be_verwijderen(table):
-
+    
+    form = None
+    
     sqlstr = text(f'select * from {table}')
     
     table_values = db.session.execute(sqlstr)
@@ -163,16 +165,37 @@ def be_verwijderen(table):
         form = BeVerwijderenGast()
         
         form.gast.choices = [gast.email for gast in table_values]
+        
+        if form.validate_on_submit():
+            
+            my_gast = db.session.execute(db.select(Gast).filter_by(email=form.gast.data)).scalar_one()
+            db.session.delete(my_gast)
+            db.session.commit()
+            return redirect(url_for('be_verwijderen', table='gast'))
     
     elif table == 'huis':
         form = BeVerwijderenHuis()
         
         form.huis.choices = [huis.naam for huis in table_values]
+        
+        if form.validate_on_submit():
+            
+            my_huis = db.session.execute(db.select(Huis).filter_by(naam=form.huis.data)).scalar_one()
+            db.session.delete(my_huis)
+            db.session.commit()
+            return redirect(url_for('be_verwijderen', table='huis'))
     
     elif table == 'types':
         form = BeVerwijderenTypes()
         
         form.types.choices = [types.idType for types in table_values]
+        
+        if form.validate_on_submit():
+            
+            my_type = db.session.execute(db.select(Types).filter_by(idType=form.types.data)).scalar_one()
+            db.session.delete(my_type)
+            db.session.commit()
+            return redirect(url_for('be_verwijderen', table='types'))
         
     sqlstr = text(f'select * from {table}')
 
@@ -188,7 +211,6 @@ def be_overzicht(table):
     
     table_values = db.session.execute(sqlstr)
     
-    print('data :', [item for item in table_values])
     return render_template('be_overzicht.html', data=table_values)
 
 
