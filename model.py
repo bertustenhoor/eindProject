@@ -30,7 +30,7 @@ class Huis(db.Model):
     
 class Boeking(db.Model):
     __tablename__ = 'boeking'
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    idboeking = db.Column(db.Integer, primary_key=True, autoincrement=True)
     gast = db.Column(db.Text, db.ForeignKey('gast.email'))
     huis = db.Column(db.Text, db.ForeignKey('huis.naam'))
     week = db.Column(db.Integer)

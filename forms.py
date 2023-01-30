@@ -70,3 +70,14 @@ class BeVerwijderenHuis(FlaskForm):
 class BeVerwijderenTypes(FlaskForm):
     types = SelectField('selecteer woning type')
     submit = SubmitField('verwijder')
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

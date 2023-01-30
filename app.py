@@ -70,16 +70,19 @@ def boeken_2(huistype, week):
     
     if form.validate_on_submit():
         
-        exist_gast = db.session.execute(text('SELECT EXISTS(SELECT * FROM gast WHERE email= :email)'), {'email': form.gast.data.lower()})
-        if exist_gast == 0:
-            new_gast = Gast(email=form.gast.data.lower(), wachtwoord=form.wachtwoord.data)
+        exist_gast = db.session.execute(text('SELECT EXISTS(SELECT * FROM gast WHERE email= :email)'), {'email': form.gast.data})
+        my_check = [item[0] for item in exist_gast]
+        if my_check == [0]:
+            new_gast = Gast(email=form.gast.data, wachtwoord=form.wachtwoord.data)
             db.session.add(new_gast)
-        
+            # db.session.commit()
+            
+        # TODO check wachtwoord on exisiting gast!
         new_boeking = Boeking(gast=form.gast.data, huis=form.huis.data, week=int(week))
         print(type(new_boeking), new_boeking)
         db.session.add(new_boeking)
-        
         db.session.commit()
+        
         return redirect(url_for('index'))
     
     return render_template('boeken_beschikbaarheid.html', form=form, huis=vrije_huisjes, huistype=huistype, week=week)
@@ -103,7 +106,8 @@ def be_toevoegen(table):                    # TODO: add to database, check for d
         
         if form.validate_on_submit():
             return redirect(url_for('be_overzicht', table=table))
-        
+
+            # TODO database connection and update
         return render_template('be_toevoegen.html', form=form, table=table)
         
     elif table == 'huis':
@@ -114,7 +118,8 @@ def be_toevoegen(table):                    # TODO: add to database, check for d
         
         if form.validate_on_submit():
             return redirect(url_for('be_overzicht', table=table))
-        
+
+            # TODO database connection and update
         return render_template('be_toevoegen.html', form=form, table=table)
         
     elif table == 'types':
@@ -131,29 +136,50 @@ def be_toevoegen(table):                    # TODO: add to database, check for d
         return render_template('be_toevoegen.html', form=form, table=table)
     elif table == 'gast':           # TODO: gast als laatste
         form = BeToevoegenGast()
-        
+                                    # TODO database connection and update
         return render_template('be_toevoegen.html', form=form, table=table)
     
     
-@app.route('/be_verwijderen/<table>')
+@app.route('/be_verwijderen/<table>', methods=['GET', 'POST'])
 def be_verwijderen(table):
+
     sqlstr = text(f'select * from {table}')
     
     table_values = db.session.execute(sqlstr)
     
     if table == 'boeking':
         form = BeVerwijderenBoeking()
+        
+        form.boeking.choices = [boeking.idboeking for boeking in table_values]
+        
+        if form.validate_on_submit():
+            # print(form.boeking.data)
+            boeking = db.session.execute(db.select(Boeking).filter_by(idboeking=form.boeking.data)).scalar_one()
+            db.session.delete(boeking)
+            db.session.commit()
+            return redirect(url_for('be_verwijderen', table='boeking'))
     
-    if table == 'gast':
+    elif table == 'gast':
         form = BeVerwijderenGast()
+        
+        form.gast.choices = [gast.email for gast in table_values]
     
-    if table == 'huis':
+    elif table == 'huis':
         form = BeVerwijderenHuis()
+        
+        form.huis.choices = [huis.naam for huis in table_values]
     
-    if table == 'types':
+    elif table == 'types':
         form = BeVerwijderenTypes()
+        
+        form.types.choices = [types.idType for types in table_values]
+        
+    sqlstr = text(f'select * from {table}')
+
+    table_values = db.session.execute(sqlstr)
     
-    return render_template('be_verwijderen.html', form=form, table=table)
+    return render_template('be_verwijderen.html', data=table_values, form=form, table=table)
+    
     
 @app.route('/be_overzicht/<table>')
 def be_overzicht(table):
@@ -162,6 +188,7 @@ def be_overzicht(table):
     
     table_values = db.session.execute(sqlstr)
     
+    print('data :', [item for item in table_values])
     return render_template('be_overzicht.html', data=table_values)
 
 

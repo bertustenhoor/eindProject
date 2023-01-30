@@ -29,7 +29,8 @@
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="{{ url_for('be_toevoegen', table='types') }}">Insert</a>
 							</li>
-							<li><a class="dropdown-item" href="#">Delete</a></li>
+							<li><a class="dropdown-item" href="{{ url_for('be_verwijderen', table='types')
+									}}">Delete</a></li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
@@ -45,7 +46,8 @@
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item" href="{{ url_for('be_toevoegen', table='huis') }}">Insert</a>
 							</li>
-							<li><a class="dropdown-item" href="#">Delete</a></li>
+							<li><a class="dropdown-item" href="{{ url_for('be_verwijderen', table='huis')
+									}}">Delete</a></li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
@@ -61,7 +63,8 @@
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item"
 								   href="{{ url_for('be_toevoegen', table='boeking') }}">Insert</a></li>
-							<li><a class="dropdown-item" href="#">Delete</a></li>
+							<li><a class="dropdown-item" href="{{ url_for('be_verwijderen', table='boeking')
+									}}">Delete</a></li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
@@ -77,7 +80,8 @@
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item"
 								   href="{{ url_for('be_toevoegen', table='gast') }}">Insert</a></li>
-							<li><a class="dropdown-item" href="#">Delete</a></li>
+							<li><a class="dropdown-item" href="{{ url_for('be_verwijderen', table='gast')
+									}}">Delete</a></li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
