@@ -32,7 +32,7 @@ class Boeking(db.Model):
     # mijngast = db.relationship('gast', backref='email', uselist=False)
     
     def __repr__(self):
-        return f'Boeking: {self.id}, huis: {self.huis}, week: {self.week}'
+        return f'Boeking: {self.idboeking}, huis: {self.huis}, week: {self.week}'
         
 
 class Gast(db.Model):
