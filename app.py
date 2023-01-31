@@ -25,12 +25,13 @@ def info():
 
 @app.route('/overzicht')
 def huisjes():
-    alle_huisjes = Huis.query.all()
-    print(*alle_huisjes, sep='\n')
+    # ah = db.session.execute(db.select(Huis)).scalars()
+    stmt = db.session.execute(db.select(Huis, Types).join_from(Huis, Types, Huis.huistype == Types.idType))
+    # print(*alle_huisjes, sep='\n')
     
-    return render_template('overzicht_huisjes.html', huisjes=alle_huisjes)
+    return render_template('overzicht_huisjes.html', huisjes=stmt)
 
-
+### 2 stappen van de boeking wizzard
 @app.route('/boeken/<huistype>', methods=['GET', 'POST'])
 def boeken(huistype):
     form = reserverenWeek()
@@ -41,15 +42,15 @@ def boeken(huistype):
         week = form.week.data
         return redirect(url_for('boeken_2', huistype=huistype, week=week))
     
-    if huistype == 'duinhaas':
+    if huistype.lower() == 'duinhaas':
         imgsrc = '/static/bun_4pax.jpg'
         txtfile = open("static/Duinhaas.txt", 'r')
         omschrijving = txtfile.read()
-    elif huistype == 'flierefluiter':
+    elif huistype.lower() == 'flierefluiter':
         imgsrc = '/static/bun_6pax.jpg'
         txtfile = open("static/Flierefluiter.txt", 'r')
         omschrijving = txtfile.read()
-    elif huistype == 'zeepaardje':
+    elif huistype.lower() == 'zeepaardje':
         imgsrc = '/static/bun_8pax.jpg'
         txtfile = open("static/Zeepaardje.txt", 'r')
         omschrijving = txtfile.read()
@@ -75,7 +76,6 @@ def boeken_2(huistype, week):
         if my_check == [0]:
             new_gast = Gast(email=form.gast.data, wachtwoord=form.wachtwoord.data)
             db.session.add(new_gast)
-            # db.session.commit()
             
         # TODO check wachtwoord on exisiting gast!
         new_boeking = Boeking(gast=form.gast.data, huis=form.huis.data, week=int(week))
@@ -88,6 +88,7 @@ def boeken_2(huistype, week):
     return render_template('boeken_beschikbaarheid.html', form=form, huis=vrije_huisjes, huistype=huistype, week=week)
 
 
+## Homepage van de backend
 @app.route('/backend')
 def back_home():
     return render_template('be_home.html')
@@ -98,45 +99,54 @@ def be_toevoegen(table):                    # TODO: add to database, check for d
     if table == 'boeking':
         form = BeToevoegenBoeking()
        
-        dd_data_gast = db.session.execute(text('SELECT email FROM gast'))
-        dd_data_huis = db.session.execute(text('SELECT naam FROM huis'))
+        dd_data_gast = db.session.execute(db.select(Gast)).scalars()
+        dd_data_huis = db.session.execute(db.select(Huis)).scalars()
         
         form.gast.choices = [gast.email for gast in dd_data_gast]
         form.huis.choices = [huis.naam for huis in dd_data_huis]
         
         if form.validate_on_submit():
+            my_boeking = Boeking(gast=form.gast.data, huis=form.huis.data, week=form.week.data)
+            db.session.add(my_boeking)
+            db.session.commit()
             return redirect(url_for('be_overzicht', table=table))
 
-            # TODO database connection and update
         return render_template('be_toevoegen.html', form=form, table=table)
         
     elif table == 'huis':
         form = BeToevoegenHuis()
-        dd_data_types = db.session.execute(text('SELECT idType FROM types'))
+        dd_data_types = db.session.execute(db.select(Types)).scalars()
         
         form.huisType.choices = [htype.idType for htype in dd_data_types]
         
         if form.validate_on_submit():
+            new_huis = Huis(naam=form.naam.data, huistype=form.huisType.data)
+            db.session.add(new_huis)
+            db.session.commit()
             return redirect(url_for('be_overzicht', table=table))
 
-            # TODO database connection and update
         return render_template('be_toevoegen.html', form=form, table=table)
         
     elif table == 'types':
         form = BeToevoegenTypes()
         
         if form.validate_on_submit():
-            db.session.execute(text('insert into types values (:idType, :capaciteit, :weekprijs)'), {'idType': form.idType.data,
-                                                                                               'capaciteit': form.capaciteit.data,
-                                                                                               'weekprijs': form.weekprijs.data})
+            new_type = Types(idType=form.idType.data, capaciteit=form.capaciteit.data, weekprijs=form.weekprijs.data)
+            db.session.add(new_type)
             db.session.commit()
-            
             return redirect(url_for('be_overzicht', table=table))
         
         return render_template('be_toevoegen.html', form=form, table=table)
-    elif table == 'gast':           # TODO: gast als laatste
+    
+    elif table == 'gast':
         form = BeToevoegenGast()
-                                    # TODO database connection and update
+        
+        if form.validate_on_submit():
+            my_gast = Gast(email= form.email.data, wachtwoord=form.wachtwoord.data)
+            db.session.add(my_gast)
+            db.session.commit()
+            return redirect(url_for('be_overzicht', table=table))
+            
         return render_template('be_toevoegen.html', form=form, table=table)
     
     

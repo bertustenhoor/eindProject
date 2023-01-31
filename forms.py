@@ -17,35 +17,28 @@ class reserverenWeek(FlaskForm):
 class BoekenForm(FlaskForm):
     huis = SelectField('Gekozen huis')
     week = IntegerField('Weeknummer')
-    # removed: , validators=[InputRequired(), NumberRange(1, 52, 'weeknummer buiten bereik')]
     gast = EmailField('Account(email adres)')
     wachtwoord = StringField('(Kies een) wachtwoord')
     submit = SubmitField('Reserveer')
 
-
-# class ToevoegenTypeForm(FlaskForm):       # TODO: cleanup?
-#     idType = StringField('Huis type')
-#     capaciteit = IntegerField('Capaciteit(personen)')
-#     weekprijs = FloatField('Weekprijs')
-#     submit = SubmitField('Submit')
     
 class BeToevoegenBoeking(FlaskForm):
-    gast = SelectField('Selecteer gast', validate_choice=False)
+    gast = SelectField('Selecteer gast', validate_choice=True)
     huis = SelectField('Selecteer woning', validate_choice=False)
     week = IntegerField('Kies week', validators=[InputRequired(), NumberRange(1, 52, 'weeknummer buiten bereik')])
     submit = SubmitField('Submit')
 
 
 class BeToevoegenHuis(FlaskForm):
-    naam = StringField('Naam van de nieuwe woning')
+    naam = StringField('Naam van de nieuwe woning', validators=[InputRequired()])
     huisType = SelectField('Selecteer type', validate_choice=False)
     submit = SubmitField('Submit')
     
 
 class BeToevoegenTypes(FlaskForm):
-    idType = StringField('Naam van het model woning')
-    capaciteit = IntegerField('Capaciteit van de woning', validators=[NumberRange(1, 20, 'capaciteit niet reeel')])
-    weekprijs = FloatField('Weekprijs accomodatie')
+    idType = StringField('Naam van het type woning', validators=[InputRequired()])
+    capaciteit = IntegerField('Capaciteit van de woning', validators=[NumberRange(1, 25, 'capaciteit niet reeel')])
+    weekprijs = FloatField('Weekprijs accomodatie', validators=[InputRequired()])
     submit = SubmitField('submit')
     
     
