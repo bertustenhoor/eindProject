@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Management pages</title>
+	<title>{% block title %}{% endblock %}</title>
 	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
 		  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -24,47 +24,13 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
 						   data-bs-toggle="dropdown" aria-expanded="false">
-							Woning-types
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="{{ url_for('be_toevoegen', table='types') }}">Insert</a>
-							</li>
-							<li><a class="dropdown-item" href="{{ url_for('be_verwijderen', table='types')
-									}}">Delete</a></li>
-							<li>
-								<hr class="dropdown-divider">
-							</li>
-							<li><a class="dropdown-item"
-								   href="{{ url_for('be_overzicht', table='types') }}">Overzicht</a></li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-						   data-bs-toggle="dropdown" aria-expanded="false">
-							Woningen
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="{{ url_for('be_toevoegen', table='huis') }}">Insert</a>
-							</li>
-							<li><a class="dropdown-item" href="{{ url_for('be_verwijderen', table='huis')
-									}}">Delete</a></li>
-							<li>
-								<hr class="dropdown-divider">
-							</li>
-							<li><a class="dropdown-item"
-								   href="{{ url_for('be_overzicht', table='huis') }}">Overzicht</a></li>
-						</ul>
-					</li>
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-						   data-bs-toggle="dropdown" aria-expanded="false">
 							Boekingen
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item"
 								   href="{{ url_for('be_toevoegen', table='boeking') }}">Insert</a></li>
-							<li><a class="dropdown-item" href="{{ url_for('be_verwijderen', table='boeking')
-									}}">Delete</a></li>
+							<li><a class="dropdown-item"
+								   href="{{ url_for('be_verwijderen', table='boeking') }}">Delete</a></li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
@@ -80,13 +46,47 @@
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<li><a class="dropdown-item"
 								   href="{{ url_for('be_toevoegen', table='gast') }}">Insert</a></li>
-							<li><a class="dropdown-item" href="{{ url_for('be_verwijderen', table='gast')
-									}}">Delete</a></li>
+							<li><a class="dropdown-item" href="{{ url_for('be_verwijderen', table='gast') }}">Delete</a>
+							</li>
 							<li>
 								<hr class="dropdown-divider">
 							</li>
 							<li><a class="dropdown-item"
 								   href="{{ url_for('be_overzicht', table='gast') }}">Overzicht</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+						   data-bs-toggle="dropdown" aria-expanded="false">
+							Woningen
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="{{ url_for('be_toevoegen', table='huis') }}">Insert</a>
+							</li>
+							<li><a class="dropdown-item" href="{{ url_for('be_verwijderen', table='huis') }}">Delete</a>
+							</li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+							<li><a class="dropdown-item"
+								   href="{{ url_for('be_overzicht', table='huis') }}">Overzicht</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+						   data-bs-toggle="dropdown" aria-expanded="false">
+							Woning-types
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" href="{{ url_for('be_toevoegen', table='types') }}">Insert</a>
+							</li>
+							<li><a class="dropdown-item"
+								   href="{{ url_for('be_verwijderen', table='types') }}">Delete</a></li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+							<li><a class="dropdown-item"
+								   href="{{ url_for('be_overzicht', table='types') }}">Overzicht</a></li>
 						</ul>
 					</li>
 				</ul>

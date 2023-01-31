@@ -1,87 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	{% extends 'base_be.html' %}
-	<meta charset="UTF-8">
-	<title>Toevoegen {{ table }}</title>
-</head>
-<body>
-	{% block content %}
-		<div class="container">
-			<h1>Toevoegen {{ table }}</h1>
-			<p>lege dropdown menu's of ontbrekende items in dropdown menu's zullen eerst aangemaakt moeten worden, ga
-				naar 'insert'</p>
-			{# Toevoegen form #}
-			<form method="POST">
-				{{ form.hidden_tag() }}
-				{% if table == 'boeking' %}
-					<table class="table table-striped table-responsive-md w-50">
-						<tr>
-							<th>{{ form.gast.label }}</th>
-							<td>{{ form.gast() }}</td>
-						</tr>
-						<tr>
-							<th>{{ form.huis.label }}</th>
-							<td>{{ form.huis() }}</td>
-						</tr>
-						<tr>
-							<th>{{ form.week.label }}</th>
-							<td>{{ form.week() }}</td>
-						</tr>
-						<tr>
-							<td colspan="2">{{ form.submit() }}</td>
-						</tr>
-					</table>
-				{% elif table == 'huis' %}
-					<table class="table table-striped table-responsive-md w-50">
-						<tr>
-							<th>{{ form.naam.label }}</th>
-							<td>{{ form.naam() }}</td>
-						</tr>
-						<tr>
-							<th>{{ form.huisType.label }}</th>
-							<td>{{ form.huisType() }}</td>
-						</tr>
-						<tr>
-							<td colspan="2">{{ form.submit() }}</td>
-						</tr>
-					</table>
-				{% elif table == 'types' %}
-					<table class="table table-striped table-responsive-md w-50">
-						<tr>
-							<th>{{ form.idType.label }}</th>
-							<td>{{ form.idType() }}</td>
-						</tr>
-						<tr>
-							<th>{{ form.capaciteit.label }}</th>
-							<td>{{ form.capaciteit() }}</td>
-						</tr>
-						<tr>
-							<th>{{ form.weekprijs.label }}</th>
-							<td>{{ form.weekprijs() }}</td>
-						</tr>
-						<tr>
-							<td colspan="2">{{ form.submit() }}</td>
-						</tr>
-					</table>
+{% extends 'base_be.html' %}
+{% block title %}
+	BE Toevoegen
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<h1>Toevoegen {{ table }}</h1>
+		<p>lege dropdown menu's of ontbrekende items in dropdown menu's zullen eerst aangemaakt moeten worden, ga
+			naar 'insert'</p>
+		{# Toevoegen form #}
+		<form method="POST">
+			{{ form.hidden_tag() }}
+			{% if table == 'boeking' %}
+				<table class="table table-striped table-responsive-md w-50">
+					<tr>
+						<th>{{ form.gast.label }}</th>
+						<td>{{ form.gast() }}</td>
+					</tr>
+					<tr>
+						<th>{{ form.huis.label }}</th>
+						<td>{{ form.huis() }}</td>
+					</tr>
+					<tr>
+						<th>{{ form.week.label }}</th>
+						<td>{{ form.week() }}</td>
+					</tr>
+					<tr>
+						<td colspan="2">{{ form.submit() }}</td>
+					</tr>
+				</table>
+			{% elif table == 'huis' %}
+				<table class="table table-striped table-responsive-md w-50">
+					<tr>
+						<th>{{ form.naam.label }}</th>
+						<td>{{ form.naam() }}</td>
+					</tr>
+					<tr>
+						<th>{{ form.huisType.label }}</th>
+						<td>{{ form.huisType() }}</td>
+					</tr>
+					<tr>
+						<td colspan="2">{{ form.submit() }}</td>
+					</tr>
+				</table>
+			{% elif table == 'types' %}
+				<table class="table table-striped table-responsive-md w-50">
+					<tr>
+						<th>{{ form.idType.label }}</th>
+						<td>{{ form.idType() }}</td>
+					</tr>
+					<tr>
+						<th>{{ form.capaciteit.label }}</th>
+						<td>{{ form.capaciteit() }}</td>
+					</tr>
+					<tr>
+						<th>{{ form.weekprijs.label }}</th>
+						<td>{{ form.weekprijs() }}</td>
+					</tr>
+					<tr>
+						<td colspan="2">{{ form.submit() }}</td>
+					</tr>
+				</table>
 
-				{% elif table == 'gast' %}
-					<table class="table table-striped table-responsive-md w-50">
-						<tr>
-							<th>{{ form.email.label }}</th>
-							<td>{{ form.email() }}</td>
-						</tr>
-						<tr>
-							<th>{{ form.wachtwoord.label }}</th>
-							<td>{{ form.wachtwoord() }}</td>
-						</tr>
-						<tr>
-							<td colspan="2">{{ form.submit() }}</td>
-						</tr>
-					</table>
-				{% endif %}
-			</form>
-		</div>
-	{% endblock %}
-</body>
-</html>
+			{% elif table == 'gast' %}
+				<table class="table table-striped table-responsive-md w-50">
+					<tr>
+						<th>{{ form.email.label }}</th>
+						<td>{{ form.email() }}</td>
+					</tr>
+					<tr>
+						<th>{{ form.wachtwoord.label }}</th>
+						<td>{{ form.wachtwoord() }}</td>
+					</tr>
+					<tr>
+						<td colspan="2">{{ form.submit() }}</td>
+					</tr>
+				</table>
+			{% endif %}
+		</form>
+	</div>
+{% endblock %}

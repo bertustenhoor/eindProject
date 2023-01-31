@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Management</title>
-</head>
-<body>
-	{% extends 'base_be.html' %}
-	{% block content %}
-		<div class="container">
+{% extends 'base_be.html' %}
+{% block title %}
+	BE Home
+{% endblock %}
+{% block content %}
+	<div class="container">
 		<h1>Management pagina's</h1>
-		</div>
-
-	{% endblock %}
-</body>
-</html>
+		<p>Op deze pagina's beheert u woningen en woningtypes, gasten en boekingen.
+			In het menu vindt u alle akties met betrekking tot de diverse onderdelen van de database.</p>
+			<strong>Let op! Het onoordeelkundig verwijderen van data kan tot onjuistheden in de systemen
+				leiden!</strong></p>
+	</div>
+{% endblock %}

@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Overzicht</title>
-</head>
-<body>
-	{% extends 'base_be.html' %}
-	{% block content %}
-		<div class="container">
-<h1>Overzicht {{ table }}</h1>
-			<table class="table table-striped">
+{% extends 'base_be.html' %}
+{% block title %}
+	BE Overzicht
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<h1>Overzicht {{ table }}</h1>
+		<table class="table table-striped">
+			<tr>
+				{% for item in data.keys() %}
+					<th scope="col">{{ item }}</th>
+				{% endfor %}
+			</tr>
+			{% for item in data %}
 				<tr>
-					{% for item in data.keys() %}
-						<th scope="col">{{ item }}</th>
+					{% for i in item %}
+						<td>{{ i }}</td>
 					{% endfor %}
 				</tr>
-				{% for item in data %}
-					<tr>
-						{% for i in item %}
-							<td>{{ i }}</td>
-						{% endfor %}
-					</tr>
-				{% endfor %}
-			</table>
-		</div>
-	{% endblock %}
-</body>
-</html>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

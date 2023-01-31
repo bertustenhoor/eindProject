@@ -1,52 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
-<body>
-	{% extends 'base.html' %}
-	{% block content %}
-		<div class="container">
-			<div class="card mx-auto mt-4 mb-5 shadow-lg text-center">
-				<h1 class="card-title text-center text-success">Boeken</h1>
-				<h4 class="card-subtitle">De volgende vakantie villa's zijn beschikbaar in de door u opgegeven
-					periode:</h4>
-				<div class="card-body text-center">
-					<table>
-						{% for keet in huis %}
-							<tr>
-								<td>{{ keet[0] }}</td>
-							</tr>
-						{% endfor %}
+{% extends 'base.html' %}
+{% block title %}
+	Boeken stap 2
+{% endblock %}
+{% block content %}
+	<div class="container">
+		<div class="card mx-auto mt-4 mb-5 shadow-lg text-center">
+			<h1 class="card-title text-center text-success">Boeken</h1>
+			<h4 class="card-subtitle">De volgende vakantie villa's zijn beschikbaar in de door u opgegeven
+				periode:</h4>
+			<div class="card-body text-center">
+				<table>
+					{% for keet in huis %}
+						<tr>
+							<td>{{ keet[0] }}</td>
+						</tr>
+					{% endfor %}
+				</table>
+				<form class="text-center" method="POST">
+					{{ form.hidden_tag() }}
+					<table class="table table-responsive w-75 mx-auto table-borderless">
+						<tr>
+							<th>week</th>
+							<td>{{ week }}</td>
+						</tr>
+						<tr>
+							<th>{{ form.huis.label }}</th>
+							<td>{{ form.huis() }}</td>
+						</tr>
+						<tr>
+							<th>{{ form.gast.label }}</th>
+							<td>{{ form.gast() }}</td>
+						</tr>
+						<tr>
+							<th>{{ form.wachtwoord.label }}</th>
+							<td>{{ form.wachtwoord() }}</td>
+						</tr>
+						<tr>
+							<td colspan="2">{{ form.submit() }}</td>
+						</tr>
 					</table>
-					<form class="text-center" method="POST">
-						{{ form.hidden_tag() }}
-						<table class="table table-responsive w-75 mx-auto table-borderless">
-							<tr>
-								<th>week</th>
-								<td>{{ week }}</td>
-							</tr>
-							<tr>
-								<th>{{ form.huis.label }}</th>
-								<td>{{ form.huis() }}</td>
-							</tr>
-							<tr>
-								<th>{{ form.gast.label }}</th>
-								<td>{{ form.gast() }}</td>
-							</tr>
-							<tr>
-								<th>{{ form.wachtwoord.label }}</th>
-								<td>{{ form.wachtwoord() }}</td>
-							</tr>
-							<tr>
-								<td colspan="2">{{ form.submit() }}</td>
-							</tr>
-						</table>
-					</form>
-				</div>
+				</form>
 			</div>
 		</div>
-	{% endblock %}
-</body>
-</html>
+	</div>
+{% endblock %}
