@@ -22,8 +22,10 @@
 						<td>{{ huis.Huis.naam }}</td>
 						<td>{{ huis.Huis.huistype }}</td>
 						<td>{{ huis.Types.capaciteit }}</td>
-						<td>{{ huis.Types.weekprijs }}</td>
-						<td><a href="{{ url_for('boeken',huistype=huis.Huis.huistype) }}"><button class="button btn-lg btn-success" >boek!</button></a></td>
+						<td>{{ "€%.2f"|format(huis.Types.weekprijs) }}</td>
+						<td><a href="{{ url_for('boeken',huistype=huis.Huis.huistype) }}">
+							<button class="button btn-lg btn-success">boek!</button>
+						</a></td>
 					</tr>
 				{% endfor %}
 			</table>

@@ -16,9 +16,8 @@ class Huis(db.Model):
     naam = db.Column(db.Text, primary_key=True)
     huistype = db.Column(db.Text, db.ForeignKey('types.idType'))
     
-    hboekingen = db.relationship('Boeking', backref='b_huis', lazy=True)
-    # htype = db.relationship('types', backref='htype', uselist=False)
-
+    boekingen = db.relationship('Boeking', backref='bhuis', lazy=True)
+    
     def __repr__(self):
         return f"Villa {self.naam} is van type {self.huistype}"
     
@@ -29,8 +28,6 @@ class Boeking(db.Model):
     huis = db.Column(db.Text, db.ForeignKey('huis.naam'))
     week = db.Column(db.Integer)
     
-    # mijngast = db.relationship('gast', backref='email', uselist=False)
-    
     def __repr__(self):
         return f'Boeking: {self.idboeking}, huis: {self.huis}, week: {self.week}'
         
@@ -40,7 +37,7 @@ class Gast(db.Model):
     email = db.Column(db.Text, primary_key=True)
     wachtwoord = db.Column(db.Text)
     
-    gboekingen = db.relationship('Boeking', backref='b_gast', lazy=True)
+    boekingen = db.relationship('Boeking', backref='bgast', lazy=True)
     
 
 class Types(db.Model):
@@ -49,7 +46,7 @@ class Types(db.Model):
     capaciteit = db.Column(db.Integer)
     weekprijs = db.Column(db.Float)
     
-    thuizen = db.relationship('Huis', backref='h_types', lazy=True)
+    huizen = db.relationship('Huis', backref='types', lazy=True)
     
     
 with app.app_context():

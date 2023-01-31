@@ -221,7 +221,7 @@ def be_overzicht(table):
     
     table_values = db.session.execute(sqlstr)
     
-    return render_template('be_overzicht.html', data=table_values)
+    return render_template('be_overzicht.html', table=table, data=table_values)
 
 
 if __name__ == '__main__':
