@@ -15,7 +15,7 @@ def back_home():
 
 
 @backend_blueprint.route('/be_toevoegen/<table>', methods=['GET', 'POST'])
-def be_toevoegen(table):  # TODO: add to database, check for doubles
+def be_toevoegen(table):
     if table == 'boeking':
         form = F.BeToevoegenBoeking()
         

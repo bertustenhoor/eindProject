@@ -29,27 +29,24 @@ def boeken(huistype):
     
     if form.validate_on_submit():
         week = form.week.data
-        return redirect(url_for('boeken_2', huistype=huistype, week=week))
+        return redirect(url_for('frontends.boeken_2', huistype=huistype, week=week))
     
     if huistype.lower() == 'duinhaas':
-        imgsrc = '../static/bun_4pax.jpg'
-        txtfile = open("../zeeduin/frontend/static/Duinhaas.txt", 'r')
-        omschrijving = txtfile.read()
+        imgsrc = '/static/bun_4pax.jpg'
+        # I surrender..
+        omschrijving = "Dit de Duinhaas tekst, met meer informatie over het huis, de verdiepingen, de uitrusting, slaapplaatsen en slaapkamers etc etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam distinctio eveniet expedita facere, facilis harum illo, illum, iure laborum laudantium nemo non placeat quae reiciendis temporibus vel velit voluptas voluptatibus?"
     elif huistype.lower() == 'flierefluiter':
-        imgsrc = '../static/bun_6pax.jpg'
-        txtfile = open("../zeeduin/frontend/static/Flierefluiter.txt", 'r')
-        omschrijving = txtfile.read()
+        imgsrc = '/static/bun_6pax.jpg'
+        omschrijving = "Dit de Flierefluiter tekst, met meer informatie over het huis, de verdiepingen, de uitrusting, slaapplaatsen en slaapkamers etc etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam distinctio eveniet expedita facere, facilis harum illo, illum, iure laborum laudantium nemo non placeat quae reiciendis temporibus vel velit voluptas voluptatibus?"
     elif huistype.lower() == 'zeepaardje':
-        imgsrc = '../static/bun_8pax.jpg'
-        txtfile = open("../zeeduin/frontend/static/Zeepaardje.txt", 'r')
-        omschrijving = txtfile.read()
+        imgsrc = '/static/bun_8pax.jpg'
+        omschrijving = 'Dit de Duinhaas tekst, met meer informatie over het huis, de verdiepingen, de uitrusting, slaapplaatsen en slaapkamers etc etc Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam distinctio eveniet expedita facere, facilis harum illo, illum, iure laborum laudantium nemo non placeat quae reiciendis temporibus vel velit voluptas voluptatibus?'
     
     return render_template('boeken.html', huistype=huistype, form=form, imgsrc=imgsrc, omschrijving=omschrijving)
 
 
 @frontend_blueprint.route('/boeken_2/<huistype>/<week>', methods=['POST', 'GET'])
 def boeken_2(huistype, week):
-    # vrije_huisjes = db.session.execute("""select * from boeking""") #TODO cleanup
     
     vrije_huisjes = db.session.execute(text("select huis.naam from huis where huis.huistype = :huistype and huis.naam NOT "
                                             "IN (select huis from boeking where boeking.week = :week);"),
@@ -70,7 +67,6 @@ def boeken_2(huistype, week):
             new_gast = Gast(email=form.gast.data, wachtwoord=form.wachtwoord.data)
             db.session.add(new_gast)
         
-        # TODO check wachtwoord on exisiting gast!
         new_boeking = Boeking(gast=form.gast.data, huis=form.huis.data, week=int(week))
         print(type(new_boeking), new_boeking)
         db.session.add(new_boeking)

@@ -25,7 +25,7 @@ class BeToevoegenTypes(FlaskForm):
 
 class BeToevoegenGast(FlaskForm):
     email = EmailField('Account (emailadres)')
-    wachtwoord = StringField('Tijdelijk wachtwoord')  # TODO: tijdelijk wachtwoord laten vervangen door gebruiker
+    wachtwoord = StringField('Tijdelijk wachtwoord')
     submit = SubmitField('submit')
 
 
