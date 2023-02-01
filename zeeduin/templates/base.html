@@ -12,11 +12,12 @@
 	{#	nav bar#}
 	<nav class="navbar navbar-light bg-light sticky-top">
 		<div class="container d-flex justify-content-start mx-5">
-			<a class="navbar-brand" href="{{ url_for('index') }}"><img src="/static/mini_logo.png" width="60"
+			<a class="navbar-brand" href="{{ url_for('index') }}"><img src="/static/mini_logo.png"
+																	   width="60"
 																	   alt="Home"></a>
-			<a class="navbar-brand" href="{{ url_for('info') }}">Info & boeken</a>
-			<a class="navbar-brand" href="{{ url_for('huisjes') }}">Overzicht woningen</a>
-			<a class="navbar-brand" href="{{ url_for('back_home') }}">Login</a>
+			<a class="navbar-brand" href="{{ url_for('frontends.info') }}">Info & boeken</a>
+			<a class="navbar-brand" href="{{ url_for('frontends.huisjes') }}">Overzicht woningen</a>
+			<a class="navbar-brand" href="{{ url_for('backends.back_home') }}">Login</a>
 		</div>
 	</nav>
 	{% block content %}
