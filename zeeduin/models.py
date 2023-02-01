@@ -40,4 +40,10 @@ class Types(db.Model):
     huizen = db.relationship('Huis', backref='types', lazy=True)
 
 
+class Staf(db.Model):
+    __tablename__ = 'staf'
+    email = db.Column(db.Text, primary_key=True)
+    wachtwoord = db.Column(db.Text)
+
+
 # db.create_all()
