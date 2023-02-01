@@ -65,6 +65,10 @@ def boeken_2(huistype, week):
     vrije_huisjes = db.session.execute(text("select huis.naam from huis where huis.huistype = :huistype and huis.naam NOT "
                                        "IN (select huis from boeking where boeking.week = :week);"),
                                        {'huistype': huistype, 'week': week})
+    #TODO: to be continued: Figure out converting above sql in below syntax...
+    
+    # vh = db.session.execute(db.select(Huis).filter(~Huis.naam.in_(db.select(Huis.naam).filter(Boeking.huis).where(Boeking.week == week))))
+    # print(vh.scalars().all())
     
     form = BoekenForm()
     form.huis.choices = [huis[0] for huis in vrije_huisjes]
