@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+	Bedankt!
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<h1 class="text-success">Uw boeking</h1>
+
+		<p>Uw boeking is gelukt! We nemen uw boeking in behandeling en bevestigen deze via de mail op het volgende
+			emailadres:</p>
+
+		<h4>{{ email }}</h4>
+
+		<p>Indien u geen mail ontvangt:</p>
+		<ul>
+			<li>Kijk voor de zekerheid in uw SPAM box, mails kunnen daar wel eens terecht komen</li>
+			<li>Heeft u geen mail ontvangen, neem dan contact op met de receptie</li>
+		</ul>
+	</div>
+{% endblock %}

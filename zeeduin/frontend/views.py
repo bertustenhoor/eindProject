@@ -72,6 +72,11 @@ def boeken_2(huistype, week):
         db.session.add(new_boeking)
         db.session.commit()
         
-        return redirect(url_for('index'))
+        return redirect(url_for('frontends.bedankt', email=form.gast.data))
     
     return render_template('boeken_beschikbaarheid.html', form=form, huis=vrije_huisjes, huistype=huistype, week=week)
+
+@frontend_blueprint.route('/bedankt/<email>')
+def bedankt(email):
+    
+    return render_template('bedankt.html', email = email)
