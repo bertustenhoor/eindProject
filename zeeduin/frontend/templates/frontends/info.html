@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}
+	Pure luxe
+{% endblock %}
+
+{% block content %}
+	<h1 class="text-success pt-6 mx-5">Welkom bij Bungalowpark "Zee & Duinen"!</h1>
+	<p class="mx-5 mt-2">Ons park is gelegen in een prachtig stukje Noord-Holland, in het hart van de duinen en aan
+		zee. Hier kunt u genieten van een ontspannen vakantie in de buurt van het strand en de natuur.</p>
+	<p class="mx-5">Bungalowpark Zee en Duinen biedt u de beste accommodatie voor uw vakantie. U kunt kiezen uit een
+		verscheidenheid aan bungalows, variërend van eenvoudig tot luxe. Al onze bungalows zijn voorzien van een
+		gezellig ingerichte woonkamer, volledig uitgeruste keuken, comfortabele slaapkamers en een badkamer. U kunt
+		ook genieten van een prachtig uitzicht op zee of het prachtige duinlandschap.</p>
+	<div class="card-group mx-5 mt-2">
+
+		<div class="card text-center m-1">
+			<div class="card-header">
+				<h4 class="text-center text-success">type "Duinhaas"</h4>
+			</div>
+			<img src="/static/bun_4pax.jpg" class="card-img-top h-50" alt="bungalow 4 personen">
+			<div class="card-body">
+				<h5 class="card-title">Royale bungalow voor 4 personen</h5>
+				<p class="card-text">Luxe bungalows voor maximaal 4 volwassenen. Van alle luxe voorzien.
+					Bungalows van het type "Duinhaas" zijn gesitueerd aan de schaduwrijke kant van het park,
+					nabij het bos. Zee en duinen bevinden zich op loopafstand.</p>
+			</div>
+			<div class="card-footer text-muted">
+				<a href="{{ url_for('frontends.boeken',huistype="duinhaas") }}" class="btn
+					btn-success">Boeken</a>
+			</div>
+		</div>
+
+		<div class="card text-center m-1">
+			<div class="card-header">
+				<h4 class="text-success text-center">type "Flierefluiter"</h4>
+			</div>
+
+			<img src="/static/bun_6pax.jpg" class="card-img-top h-50" alt="bungalow 6 personen">
+
+			<div class="card-body">
+				<h5 class="card-title">luxe villa voor 6 personen</h5>
+				<p class="card-text">De zes-persoons vilaa's van het type "Flierefluiter" bevinden zicht tussen
+					het bos en de duinen. Deze villa's zijn van alle gemakken voorzien. Voor wie van veel
+					privacy en luxe houdt zijn deze woningen uitermate geschikt.</p>
+			</div>
+			<div class="card-footer text-muted">
+				<a href="{{ url_for('frontends.boeken',huistype="flierefluiter") }}" class="btn btn-success">Boeken</a>
+			</div>
+		</div>
+
+		<div class="card text-center m-1">
+			<div class="card-header">
+				<h4 class="text-success text-center">type "Zeepaardje"</h4>
+			</div>
+
+			<img src="/static/bun_8pax.jpg" class="card-img-top h-50" alt="bungalow 8 personen">
+
+			<div class="card-body">
+				<h5 class="card-title">Ultra luxe voor 8 personen</h5>
+				<p class="card-text">Het paradepaardje op ons vakantiepark, groot genoeg voor gezinnen van acht
+					tot tien personen. Deze woningen liggen aan het duinmeer, met volledige privacy. Alle
+					villa's van het type "Zeepaardje" zijn voorzien van Jacuzzi en Sauna. Al de villa's zijn
+					gelegen direct tegen de duinenrij.</p>
+			</div>
+			<div class="card-footer text-muted">
+				<a href="{{ url_for('frontends.boeken',huistype="zeepaardje") }}" class="btn btn-success">Boeken</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

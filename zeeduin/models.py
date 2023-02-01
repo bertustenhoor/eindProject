@@ -1,16 +1,6 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:Hanze12345@localhost/zeeenduin'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-db = SQLAlchemy(app)
-
+from zeeduin import db
 
 class Huis(db.Model):
-    
     __tablename__ = 'huis'
     
     naam = db.Column(db.Text, primary_key=True)
@@ -20,7 +10,8 @@ class Huis(db.Model):
     
     def __repr__(self):
         return f"Villa {self.naam} is van type {self.huistype}"
-    
+
+
 class Boeking(db.Model):
     __tablename__ = 'boeking'
     idboeking = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -30,7 +21,7 @@ class Boeking(db.Model):
     
     def __repr__(self):
         return f'Boeking: {self.idboeking}, huis: {self.huis}, week: {self.week}'
-        
+
 
 class Gast(db.Model):
     __tablename__ = 'gast'
@@ -38,7 +29,7 @@ class Gast(db.Model):
     wachtwoord = db.Column(db.Text)
     
     boekingen = db.relationship('Boeking', backref='bgast', lazy=True)
-    
+
 
 class Types(db.Model):
     __tablename__ = 'types'
@@ -47,8 +38,6 @@ class Types(db.Model):
     weekprijs = db.Column(db.Float)
     
     huizen = db.relationship('Huis', backref='types', lazy=True)
-    
-    
-with app.app_context():
-    db.create_all()
-    
+
+
+# db.create_all()
